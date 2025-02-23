@@ -47,7 +47,7 @@ public class DriverManager {
         } else {
             //enhanced for loop to iterate through array, format information, and display back to user
             for (Driver driver : drivers) {
-                System.out.println(driver.getDriverName() + "-" + driver.getDriverNumber() + "-" + driver.getCurrentTeam() + "-" + driver.getAge() + driver.getNationality() + "-" + driver.getNumberOfRaces() + "-" + driver.getNumberOfWins() + "-" + driver.getIsActiveDriver() + driver.getHeight() + "-" + driver.getCareerPoints() + "\n");
+                System.out.println(driver.getDriverName() + "-" + driver.getDriverNumber() + "-" + driver.getCurrentTeam() + "-" + driver.getAge() + "-" + driver.getNationality() + "-" + driver.getNumberOfRaces() + "-" + driver.getNumberOfWins() + "-" + driver.getIsActiveDriver() + "-" + driver.getHeight() + "-" + driver.getCareerPoints() + "\n");
             }
         }
     }
@@ -96,74 +96,94 @@ public class DriverManager {
 
     //method for user interaction with DMS
     public void menu() {
-        //scanner to read user input
         Scanner scanner = new Scanner(System.in);
-        //loop that continues until user exits program
+
         while (true) {
-            //menu options
             System.out.println("Select a number to continue.");
             System.out.println("1. Add Driver");
             System.out.println("2. Remove Driver");
             System.out.println("3. Display All Drivers");
             System.out.println("4. Load Drivers from File");
             System.out.println("5. Exit");
-            //reads users choice as int
+
+            // Check if input is an integer
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                continue;
+            }
+
             int choice = scanner.nextInt();
-            //handles users choice
+            scanner.nextLine();
+
             switch (choice) {
                 case 1:
-                    //adds new driver
                     System.out.print("Enter Driver Name: ");
-                    scanner.nextLine();
                     String driverName = scanner.nextLine();
+
                     System.out.print("Enter Driver Number: ");
                     int driverNumber = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter Current Team: ");
-                    String currentTeam = scanner.next();
+                    String currentTeam = scanner.nextLine();
+
                     System.out.print("Enter Age: ");
                     int age = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter Nationality: ");
-                    String nationality = scanner.next();
+                    String nationality = scanner.nextLine();
+
                     System.out.print("Enter Number of Races: ");
                     int numberOfRaces = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.print("Enter Number of Wins: ");
                     int numberOfWins = scanner.nextInt();
-                    System.out.print("Is the driver Active?: (true or false) ");
+                    scanner.nextLine();
+
+                    System.out.print("Is the driver Active? (true or false): ");
                     boolean isActiveDriver = scanner.nextBoolean();
+                    scanner.nextLine();
+
                     System.out.print("Enter Height: ");
                     float height = scanner.nextFloat();
+                    scanner.nextLine();
+
                     System.out.print("Enter Career Points: ");
                     double careerPoints = scanner.nextDouble();
-                    //creates new driver based on user input
+                    scanner.nextLine();
+
                     addDriver(new Driver(driverName, driverNumber, currentTeam, age, nationality, numberOfRaces, numberOfWins, isActiveDriver, height, careerPoints));
                     break;
+
                 case 2:
-                    //removes driver
                     System.out.print("Enter driver name to remove: ");
-                    driverName = scanner.next();
-                    removeDriver(driverName);
+                    String removeName = scanner.nextLine();
+                    removeDriver(removeName);
                     break;
+
                 case 3:
-                    //displays all drivers
                     displayAllDrivers();
                     break;
+
                 case 4:
-                    //loads drivers from file
                     System.out.print("Enter filename to load drivers: ");
-                    scanner.nextLine(); // Consume newline
                     String filename = scanner.nextLine();
                     loadDriversFromFile(filename);
                     break;
+
                 case 5:
-                    //exits program
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
+
                 default:
-                    //handles invalid choice
                     System.out.println("Invalid choice. Try again.");
                     break;
             }
         }
     }
+
 }
