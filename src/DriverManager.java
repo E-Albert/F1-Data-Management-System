@@ -128,7 +128,7 @@ public class DriverManager {
                     int numberOfRaces = scanner.nextInt();
                     System.out.print("Enter Number of Wins: ");
                     int numberOfWins = scanner.nextInt();
-                    System.out.print("Is the driver Active?: ");
+                    System.out.print("Is the driver Active?: (true or false) ");
                     boolean isActiveDriver = scanner.nextBoolean();
                     System.out.print("Enter Height: ");
                     float height = scanner.nextFloat();
