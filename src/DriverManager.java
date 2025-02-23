@@ -114,7 +114,8 @@ public class DriverManager {
                 case 1:
                     //adds new driver
                     System.out.print("Enter Driver Name: ");
-                    String driverName = scanner.next();
+                    scanner.nextLine();
+                    String driverName = scanner.nextLine();
                     System.out.print("Enter Driver Number: ");
                     int driverNumber = scanner.nextInt();
                     System.out.print("Enter Current Team: ");
