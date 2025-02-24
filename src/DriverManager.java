@@ -6,12 +6,13 @@ import java.io.File;
 import java.util.ArrayList;
 //an interface used to maintain order of elements
 import java.util.List;
-//used to read user input
+//used to compare objects
 import java.util.Objects;
+//used to read user input
 import java.util.Scanner;
 
 public class DriverManager {
-
+    //stores all driver objects in a list
     private List<Driver> drivers;
 
     //constructor to initialize list
@@ -19,13 +20,13 @@ public class DriverManager {
         drivers = new ArrayList<>();
     }
 
-    //method to add driver
+    //method to add driver to list
     public void addDriver(Driver driver) {
         drivers.add(driver);
         System.out.println("Successfully added driver.");
     }
 
-    //method to remove a driver by name
+    //method to remove a driver by name from list
     public void removeDriver(String driverName) {
         //enhanced for loop to iterate through array and find name
         for (Driver driver : drivers) {
@@ -39,7 +40,7 @@ public class DriverManager {
         System.out.println("Driver not found.");
     }
 
-    //method to display all drivers
+    //method to display all drivers from list
     public void displayAllDrivers() {
         //checks if array is empty
         if (drivers.isEmpty()) {
@@ -99,6 +100,7 @@ public class DriverManager {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            //displays options to user
             System.out.println("Select a number to continue.");
             System.out.println("1. Add Driver");
             System.out.println("2. Remove Driver");
@@ -106,82 +108,126 @@ public class DriverManager {
             System.out.println("4. Load Drivers from File");
             System.out.println("5. Exit");
 
-            // Check if input is an integer
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.next();
-                continue;
-            }
+            //get user input
+            int choice = getIntInput(scanner, "Enter your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
+            //action executed based on user selection
             switch (choice) {
                 case 1:
-                    System.out.print("Enter Driver Name: ");
-                    String driverName = scanner.nextLine();
+                    //gathering driver details so that a new driver object can be created and stored in list
+                    String driverName = getStringInput(scanner, "Enter Driver Name: ");
+                    int driverNumber = getIntInput(scanner, "Enter Driver Number: ");
+                    String currentTeam = getStringInput(scanner, "Enter Current Team: ");
+                    int age = getIntInput(scanner, "Enter Age: ");
+                    String nationality = getStringInput(scanner, "Enter Nationality: ");
+                    int numberOfRaces = getIntInput(scanner, "Enter Number of Races: ");
+                    int numberOfWins = getIntInput(scanner, "Enter Number of Wins: ");
+                    boolean isActiveDriver = getBooleanInput(scanner, "Is the driver Active? (true or false): ");
+                    float height = getFloatInput(scanner, "Enter Height(cm): ");
+                    double careerPoints = getDoubleInput(scanner, "Enter Career Points: ");
 
-                    System.out.print("Enter Driver Number: ");
-                    int driverNumber = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Enter Current Team: ");
-                    String currentTeam = scanner.nextLine();
-
-                    System.out.print("Enter Age: ");
-                    int age = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Enter Nationality: ");
-                    String nationality = scanner.nextLine();
-
-                    System.out.print("Enter Number of Races: ");
-                    int numberOfRaces = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Enter Number of Wins: ");
-                    int numberOfWins = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Is the driver Active? (true or false): ");
-                    boolean isActiveDriver = scanner.nextBoolean();
-                    scanner.nextLine();
-
-                    System.out.print("Enter Height: ");
-                    float height = scanner.nextFloat();
-                    scanner.nextLine();
-
-                    System.out.print("Enter Career Points: ");
-                    double careerPoints = scanner.nextDouble();
-                    scanner.nextLine();
-
+                    //the driver is created and added to list
                     addDriver(new Driver(driverName, driverNumber, currentTeam, age, nationality, numberOfRaces, numberOfWins, isActiveDriver, height, careerPoints));
                     break;
 
                 case 2:
-                    System.out.print("Enter driver name to remove: ");
-                    String removeName = scanner.nextLine();
+                    //getting name of driver to remove
+                    String removeName = getStringInput(scanner, "Enter driver name to remove (case sensitive): ");
                     removeDriver(removeName);
                     break;
 
                 case 3:
+                    //shows all drivers
                     displayAllDrivers();
                     break;
 
                 case 4:
-                    System.out.print("Enter filename to load drivers: ");
+                    //getting filename from user to load driver data from file
+                    System.out.print("Enter filename to load drivers (absolute path): ");
                     String filename = scanner.nextLine();
                     loadDriversFromFile(filename);
                     break;
 
                 case 5:
+                    //exiting the program
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
 
                 default:
+                    //message to user when there is a wrong input
                     System.out.println("Invalid choice. Try again.");
                     break;
+            }
+        }
+    }
+
+    // Validation Methods
+    //this method ensures that the input only contains letters. Uses a regex to help with validation
+    private String getStringInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            String input = scanner.nextLine().trim();
+            if (input.matches("[a-zA-Z ]+")) {
+                return input;
+            }
+            System.out.println("Invalid input. Please enter only letters.");
+        }
+    }
+
+    //this method ensures that the input only contains integers
+    private int getIntInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            if (scanner.hasNextInt()) {
+                int value = scanner.nextInt();
+                scanner.nextLine();
+                return value;
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.next();
+            }
+        }
+    }
+
+    //this method ensures that the input only accepts the words true or false
+    private boolean getBooleanInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("true") || input.equals("false")) {
+                return Boolean.parseBoolean(input);
+            }
+            System.out.println("Invalid input. Please enter 'true' or 'false'.");
+        }
+    }
+
+    //this method ensures that the input is a float
+    private float getFloatInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            if (scanner.hasNextFloat()) {
+                float value = scanner.nextFloat();
+                scanner.nextLine();
+                return value;
+            } else {
+                System.out.println("Invalid input. Please enter a valid float.");
+                scanner.next();
+            }
+        }
+    }
+
+    //this method ensures that the input is a double
+    private double getDoubleInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            if (scanner.hasNextDouble()) {
+                double value = scanner.nextDouble();
+                scanner.nextLine();
+                return value;
+            } else {
+                System.out.println("Invalid input. Please enter a valid double.");
+                scanner.next();
             }
         }
     }
