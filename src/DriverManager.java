@@ -94,6 +94,48 @@ public class DriverManager {
         }
     }
 
+    //method to update driver information
+    public void updateDriver(String driverName, Scanner scanner) {
+        for (Driver driver : drivers) {
+            //checks if the driver exists
+            if (Objects.equals(driver.getDriverName(), driverName)) {
+                System.out.println("Updating driver: " + driverName);
+                //prompts user for new values
+                driver.setDriverNumber(getIntInput(scanner, "Enter new Driver Number: "));
+                driver.setCurrentTeam(getStringInput(scanner, "Enter new Current Team: "));
+                driver.setAge(getIntInput(scanner, "Enter new Age: "));
+                driver.setNationality(getStringInput(scanner, "Enter new Nationality: "));
+                driver.setNumberOfRaces(getIntInput(scanner, "Enter new Number of Races: "));
+                driver.setNumberOfWins(getIntInput(scanner, "Enter new Number of Wins: "));
+                driver.setIsActiveDriver(getBooleanInput(scanner, "Is the driver Active? (true or false): "));
+                driver.setHeight(getFloatInput(scanner, "Enter new Height(cm): "));
+                driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
+                System.out.println("Driver information updated successfully.");
+                return;
+            }
+        }
+        //message if driver is not found
+        System.out.println("Driver not found.");
+    }
+
+    //custom method that calculates win-to-race ratio for given driver
+    public void calculateWinRatio(String driverName) {
+        for (Driver driver : drivers) {
+            //checks if the driver exists
+            if (Objects.equals(driver.getDriverName(), driverName)) {
+                //checks if driver has driven at least 1 race
+                if (driver.getNumberOfRaces() > 0) {
+                    double ratio = (double) driver.getNumberOfWins() / driver.getNumberOfRaces();
+                    System.out.println("Win-to-Race Ratio: " + String.format("%.2f", ratio) + "%");
+                } else {
+                    System.out.println("No races completed yet.");
+                }
+                return;
+            }
+        }
+        //message if driver is not found
+        System.out.println("Driver not found.");
+    }
 
     //method for user interaction with DMS
     public void menu() {
@@ -106,7 +148,9 @@ public class DriverManager {
             System.out.println("2. Remove Driver");
             System.out.println("3. Display All Drivers");
             System.out.println("4. Load Drivers from File");
-            System.out.println("5. Exit");
+            System.out.println("5. Update Driver Information");
+            System.out.println("6. Calculate Win-to-Race Ratio");
+            System.out.println("7. Exit");
 
             //get user input
             int choice = getIntInput(scanner, "Enter your choice: ");
@@ -149,15 +193,17 @@ public class DriverManager {
                     break;
 
                 case 5:
-                    //exiting the program
+                    updateDriver(getStringInput(scanner, "Enter driver name to update (case sensitive): "), scanner);
+                    break;
+                case 6:
+                    calculateWinRatio(getStringInput(scanner, "Enter driver name to calculate win ratio (case sensitive): "));
+                    break;
+                case 7:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
-
                 default:
-                    //message to user when there is a wrong input
                     System.out.println("Invalid choice. Try again.");
-                    break;
             }
         }
     }
