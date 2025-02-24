@@ -108,7 +108,7 @@ public class DriverManager {
                 driver.setNumberOfRaces(getIntInput(scanner, "Enter new Number of Races: "));
                 driver.setNumberOfWins(getIntInput(scanner, "Enter new Number of Wins: "));
                 driver.setIsActiveDriver(getBooleanInput(scanner, "Is the driver Active? (true or false): "));
-                driver.setHeight(getFloatInput(scanner, "Enter new Height(cm): "));
+                driver.setHeight(getFloatInput(scanner, "Enter new Height(m): "));
                 driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
                 System.out.println("Driver information updated successfully.");
                 return;
@@ -167,7 +167,7 @@ public class DriverManager {
                     int numberOfRaces = getIntInput(scanner, "Enter Number of Races: ");
                     int numberOfWins = getIntInput(scanner, "Enter Number of Wins: ");
                     boolean isActiveDriver = getBooleanInput(scanner, "Is the driver Active? (true or false): ");
-                    float height = getFloatInput(scanner, "Enter Height(cm): ");
+                    float height = getFloatInput(scanner, "Enter Height(m): ");
                     double careerPoints = getDoubleInput(scanner, "Enter Career Points: ");
 
                     //the driver is created and added to list
