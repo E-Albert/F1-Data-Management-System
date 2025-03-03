@@ -43,13 +43,15 @@ public class DriverManager {
     }
 
     // Method to display all drivers from list, returns nothing, as this is for display purposes
-    public void displayAllDrivers() {
+    public boolean displayAllDrivers() {
         if (drivers.isEmpty()) {
             System.out.println("No drivers available to display.");
+            return false;
         } else {
             for (Driver driver : drivers) {
                 System.out.println(driver.getDriverName() + "-" + driver.getDriverNumber() + "-" + driver.getCurrentTeam() + "-" + driver.getAge() + "-" + driver.getNationality() + "-" + driver.getNumberOfRaces() + "-" + driver.getNumberOfWins() + "-" + driver.getIsActiveDriver() + "-" + driver.getHeight() + "-" + driver.getCareerPoints() + "\n");
             }
+            return true;
         }
     }
 
