@@ -20,52 +20,47 @@ public class DriverManager {
         drivers = new ArrayList<>();
     }
 
-    //method to add driver to list
-    public void addDriver(Driver driver) {
-        drivers.add(driver);
-        System.out.println("Successfully added driver.");
+    // Method to add driver to list, now returns boolean
+    public boolean addDriver(Driver driver) {
+        boolean isAdded = drivers.add(driver);
+        if (isAdded) {
+            System.out.println("Successfully added driver.");
+        }
+        return isAdded;
     }
 
-    //method to remove a driver by name from list
-    public void removeDriver(String driverName) {
-        //enhanced for loop to iterate through array and find name
+    // Method to remove a driver by name from list, now returns boolean
+    public boolean removeDriver(String driverName) {
         for (Driver driver : drivers) {
             if (Objects.equals(driver.getDriverName(), driverName)) {
                 drivers.remove(driver);
                 System.out.println("Successfully removed driver.");
-                return;
+                return true;
             }
         }
-        //returns if matching id isn't found
         System.out.println("Driver not found.");
+        return false;
     }
 
-    //method to display all drivers from list
+    // Method to display all drivers from list, returns nothing, as this is for display purposes
     public void displayAllDrivers() {
-        //checks if array is empty
         if (drivers.isEmpty()) {
             System.out.println("No drivers available to display.");
         } else {
-            //enhanced for loop to iterate through array, format information, and display back to user
             for (Driver driver : drivers) {
                 System.out.println(driver.getDriverName() + "-" + driver.getDriverNumber() + "-" + driver.getCurrentTeam() + "-" + driver.getAge() + "-" + driver.getNationality() + "-" + driver.getNumberOfRaces() + "-" + driver.getNumberOfWins() + "-" + driver.getIsActiveDriver() + "-" + driver.getHeight() + "-" + driver.getCareerPoints() + "\n");
             }
         }
     }
 
-    //method to load information from a file and add drivers to F1 DMS
-    public void loadDriversFromFile(String filename) {
+    // Method to load information from a file and add drivers to F1 DMS, now returns boolean
+    public boolean loadDriversFromFile(String filename) {
         try {
-            //creation of scanner object to read file with given name
             Scanner fileScanner = new Scanner(new File(filename));
             while (fileScanner.hasNextLine()) {
-                //reads next line of file
                 String line = fileScanner.nextLine();
-                //splits information, uses hyphen as separation checkpoints
                 String[] details = line.split("-");
-                //checks if line has 10 parts
                 if (details.length == 10) {
-                    //assigns each part to a variable
                     String driverName = details[0].trim();
                     int driverNumber = Integer.parseInt(details[1].trim());
                     String currentTeam = details[2].trim();
@@ -76,31 +71,28 @@ public class DriverManager {
                     boolean isActiveDriver = Boolean.parseBoolean(details[7].trim());
                     float height = Float.parseFloat(details[8].trim());
                     double careerPoints = Double.parseDouble(details[9].trim());
-                    //creates new driver, initializes attributes, and adds to list of drivers
+
                     addDriver(new Driver(driverName, driverNumber, currentTeam, age, nationality, numberOfRaces, numberOfWins, isActiveDriver, height, careerPoints));
                 } else {
-                    //error message
                     System.out.println("Invalid data format in line: " + line);
                 }
             }
-            //closes scanner after reading file
             fileScanner.close();
             System.out.println("Drivers successfully loaded from file.");
-            //catch block that deals with file not being found
+            return true;
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
         } catch (Exception e) {
             System.out.println("Error processing the file: " + e.getMessage());
         }
+        return false;
     }
 
-    //method to update driver information
-    public void updateDriver(String driverName, Scanner scanner) {
+    // Method to update driver information, now returns boolean
+    public boolean updateDriver(String driverName, Scanner scanner) {
         for (Driver driver : drivers) {
-            //checks if the driver exists
             if (Objects.equals(driver.getDriverName(), driverName)) {
                 System.out.println("Updating driver: " + driverName);
-                //prompts user for new values
                 driver.setDriverNumber(getIntInput(scanner, "Enter new Driver Number: "));
                 driver.setCurrentTeam(getStringInput(scanner, "Enter new Current Team: "));
                 driver.setAge(getIntInput(scanner, "Enter new Age: "));
@@ -111,31 +103,31 @@ public class DriverManager {
                 driver.setHeight(getFloatInput(scanner, "Enter new Height(m): "));
                 driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
                 System.out.println("Driver information updated successfully.");
-                return;
+                return true;
             }
         }
-        //message if driver is not found
         System.out.println("Driver not found.");
+        return false;
     }
 
-    //custom method that calculates win-to-race ratio for given driver
-    public void calculateWinRatio(String driverName) {
+    // Custom method that calculates win-to-race ratio for given driver, now returns boolean
+    public boolean calculateWinRatio(String driverName) {
         for (Driver driver : drivers) {
-            //checks if the driver exists
             if (Objects.equals(driver.getDriverName(), driverName)) {
-                //checks if driver has driven at least 1 race
                 if (driver.getNumberOfRaces() > 0) {
                     double ratio = (double) driver.getNumberOfWins() / driver.getNumberOfRaces();
                     System.out.println("Win-to-Race Ratio: " + String.format("%.2f", ratio) + "%");
+                    return true;
                 } else {
                     System.out.println("No races completed yet.");
+                    return false;
                 }
-                return;
             }
         }
-        //message if driver is not found
         System.out.println("Driver not found.");
+        return false;
     }
+
 
     //method for user interaction with DMS
     public void menu() {
