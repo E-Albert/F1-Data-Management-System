@@ -91,19 +91,40 @@ public class DriverManager {
     }
 
     // Method to update driver information, now returns boolean
-    public boolean updateDriver(String driverName, Scanner scanner) {
+//    public boolean updateDriver(String driverName, Scanner scanner) {
+//        for (Driver driver : drivers) {
+//            if (Objects.equals(driver.getDriverName(), driverName)) {
+//                System.out.println("Updating driver: " + driverName);
+//                driver.setDriverNumber(getIntInput(scanner, "Enter new Driver Number: "));
+//                driver.setCurrentTeam(getStringInput(scanner, "Enter new Current Team: "));
+//                driver.setAge(getIntInput(scanner, "Enter new Age: "));
+//                driver.setNationality(getStringInput(scanner, "Enter new Nationality: "));
+//                driver.setNumberOfRaces(getIntInput(scanner, "Enter new Number of Races: "));
+//                driver.setNumberOfWins(getIntInput(scanner, "Enter new Number of Wins: "));
+//                driver.setIsActiveDriver(getBooleanInput(scanner, "Is the driver Active? (true or false): "));
+//                driver.setHeight(getFloatInput(scanner, "Enter new Height(m): "));
+//                driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
+//                System.out.println("Driver information updated successfully.");
+//                return true;
+//            }
+//        }
+//        System.out.println("Driver not found.");
+//        return false;
+//    }
+    public boolean updateDriver(String driverName, Driver updatedDriver) {
         for (Driver driver : drivers) {
             if (Objects.equals(driver.getDriverName(), driverName)) {
-                System.out.println("Updating driver: " + driverName);
-                driver.setDriverNumber(getIntInput(scanner, "Enter new Driver Number: "));
-                driver.setCurrentTeam(getStringInput(scanner, "Enter new Current Team: "));
-                driver.setAge(getIntInput(scanner, "Enter new Age: "));
-                driver.setNationality(getStringInput(scanner, "Enter new Nationality: "));
-                driver.setNumberOfRaces(getIntInput(scanner, "Enter new Number of Races: "));
-                driver.setNumberOfWins(getIntInput(scanner, "Enter new Number of Wins: "));
-                driver.setIsActiveDriver(getBooleanInput(scanner, "Is the driver Active? (true or false): "));
-                driver.setHeight(getFloatInput(scanner, "Enter new Height(m): "));
-                driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
+                // Updating the driver with the details from updatedDriver
+                driver.setDriverNumber(updatedDriver.getDriverNumber());
+                driver.setCurrentTeam(updatedDriver.getCurrentTeam());
+                driver.setAge(updatedDriver.getAge());
+                driver.setNationality(updatedDriver.getNationality());
+                driver.setNumberOfRaces(updatedDriver.getNumberOfRaces());
+                driver.setNumberOfWins(updatedDriver.getNumberOfWins());
+                driver.setIsActiveDriver(updatedDriver.getIsActiveDriver());
+                driver.setHeight(updatedDriver.getHeight());
+                driver.setCareerPoints(updatedDriver.getCareerPoints());
+
                 System.out.println("Driver information updated successfully.");
                 return true;
             }
@@ -111,6 +132,7 @@ public class DriverManager {
         System.out.println("Driver not found.");
         return false;
     }
+
 
     // Custom method that calculates win-to-race ratio for given driver, now returns boolean
     public boolean calculateWinRatio(String driverName) {
@@ -187,7 +209,39 @@ public class DriverManager {
                     break;
 
                 case 5:
-                    updateDriver(getStringInput(scanner, "Enter driver name to update (case sensitive): "), scanner);
+                    // Get the driver name to update
+                    String updateDriverName = getStringInput(scanner, "Enter driver name to update (case sensitive): ");
+
+                    // Find the driver in the list
+                    Driver existingDriver = null;
+                    for (Driver driver : drivers) {
+                        if (driver.getDriverName().equals(updateDriverName)) {
+                            existingDriver = driver;
+                            break;
+                        }
+                    }
+
+                    if (existingDriver != null) {
+                        // Driver exists, so gather updated details
+                        int updatedDriverNumber = getIntInput(scanner, "Enter new Driver Number: ");
+                        String updatedCurrentTeam = getStringInput(scanner, "Enter new Current Team: ");
+                        int updatedAge = getIntInput(scanner, "Enter new Age: ");
+                        String updatedNationality = getStringInput(scanner, "Enter new Nationality: ");
+                        int updatedNumberOfRaces = getIntInput(scanner, "Enter new Number of Races: ");
+                        int updatedNumberOfWins = getIntInput(scanner, "Enter new Number of Wins: ");
+                        boolean updatedIsActiveDriver = getBooleanInput(scanner, "Is the driver Active? (true or false): ");
+                        float updatedHeight = getFloatInput(scanner, "Enter new Height(m): ");
+                        double updatedCareerPoints = getDoubleInput(scanner, "Enter new Career Points: ");
+
+                        // Create updated driver object
+                        Driver updatedDriver = new Driver(updateDriverName, updatedDriverNumber, updatedCurrentTeam, updatedAge, updatedNationality, updatedNumberOfRaces, updatedNumberOfWins, updatedIsActiveDriver, updatedHeight, updatedCareerPoints);
+
+                        // Call updateDriver method
+                        updateDriver(updateDriverName, updatedDriver);
+                    } else {
+                        // If driver is not found, print a message and do not ask for input
+                        System.out.println("Driver not found. No updates made.");
+                    }
                     break;
                 case 6:
                     calculateWinRatio(getStringInput(scanner, "Enter driver name to calculate win ratio (case sensitive): "));
