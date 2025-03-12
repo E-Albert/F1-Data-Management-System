@@ -1,3 +1,5 @@
+package com.f1data.management;
+
 public class Driver {
     //driver attributes
     private String driverName;

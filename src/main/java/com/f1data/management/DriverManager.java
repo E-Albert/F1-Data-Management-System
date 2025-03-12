@@ -1,4 +1,4 @@
-//exception that handles wrong file name errors. Prevents system from crashing
+package com.f1data.management;//exception that handles wrong file name errors. Prevents system from crashing
 import java.io.FileNotFoundException;
 //allows files to be read
 import java.io.File;
@@ -38,7 +38,7 @@ public class DriverManager {
                 return true;
             }
         }
-        System.out.println("Driver not found.");
+        System.out.println("com.f1data.management.Driver not found.");
         return false;
     }
 
@@ -92,10 +92,10 @@ public class DriverManager {
 
     // Method to update driver information, now returns boolean
 //    public boolean updateDriver(String driverName, Scanner scanner) {
-//        for (Driver driver : drivers) {
+//        for (com.f1data.management.Driver driver : drivers) {
 //            if (Objects.equals(driver.getDriverName(), driverName)) {
 //                System.out.println("Updating driver: " + driverName);
-//                driver.setDriverNumber(getIntInput(scanner, "Enter new Driver Number: "));
+//                driver.setDriverNumber(getIntInput(scanner, "Enter new com.f1data.management.Driver Number: "));
 //                driver.setCurrentTeam(getStringInput(scanner, "Enter new Current Team: "));
 //                driver.setAge(getIntInput(scanner, "Enter new Age: "));
 //                driver.setNationality(getStringInput(scanner, "Enter new Nationality: "));
@@ -104,11 +104,11 @@ public class DriverManager {
 //                driver.setIsActiveDriver(getBooleanInput(scanner, "Is the driver Active? (true or false): "));
 //                driver.setHeight(getFloatInput(scanner, "Enter new Height(m): "));
 //                driver.setCareerPoints(getDoubleInput(scanner, "Enter new Career Points: "));
-//                System.out.println("Driver information updated successfully.");
+//                System.out.println("com.f1data.management.Driver information updated successfully.");
 //                return true;
 //            }
 //        }
-//        System.out.println("Driver not found.");
+//        System.out.println("com.f1data.management.Driver not found.");
 //        return false;
 //    }
     public boolean updateDriver(String driverName, Driver updatedDriver) {
@@ -125,11 +125,11 @@ public class DriverManager {
                 driver.setHeight(updatedDriver.getHeight());
                 driver.setCareerPoints(updatedDriver.getCareerPoints());
 
-                System.out.println("Driver information updated successfully.");
+                System.out.println("com.f1data.management.Driver information updated successfully.");
                 return true;
             }
         }
-        System.out.println("Driver not found.");
+        System.out.println("com.f1data.management.Driver not found.");
         return false;
     }
 
@@ -148,7 +148,7 @@ public class DriverManager {
                 }
             }
         }
-        System.out.println("Driver not found.");
+        System.out.println("com.f1data.management.Driver not found.");
         return false;
     }
 
@@ -160,11 +160,11 @@ public class DriverManager {
         while (true) {
             //displays options to user
             System.out.println("Select a number to continue.");
-            System.out.println("1. Add Driver");
-            System.out.println("2. Remove Driver");
+            System.out.println("1. Add com.f1data.management.Driver");
+            System.out.println("2. Remove com.f1data.management.Driver");
             System.out.println("3. Display All Drivers");
             System.out.println("4. Load Drivers from File");
-            System.out.println("5. Update Driver Information");
+            System.out.println("5. Update com.f1data.management.Driver Information");
             System.out.println("6. Calculate Win-to-Race Ratio");
             System.out.println("7. Exit");
 
@@ -175,8 +175,8 @@ public class DriverManager {
             switch (choice) {
                 case 1:
                     //gathering driver details so that a new driver object can be created and stored in list
-                    String driverName = getStringInput(scanner, "Enter Driver Name: ");
-                    int driverNumber = getIntInput(scanner, "Enter Driver Number: ");
+                    String driverName = getStringInput(scanner, "Enter com.f1data.management.Driver Name: ");
+                    int driverNumber = getIntInput(scanner, "Enter com.f1data.management.Driver Number: ");
                     String currentTeam = getStringInput(scanner, "Enter Current Team: ");
                     int age = getIntInput(scanner, "Enter Age: ");
                     String nationality = getStringInput(scanner, "Enter Nationality: ");
@@ -222,8 +222,8 @@ public class DriverManager {
                     }
 
                     if (existingDriver != null) {
-                        // Driver exists, so gather updated details
-                        int updatedDriverNumber = getIntInput(scanner, "Enter new Driver Number: ");
+                        // com.f1data.management.Driver exists, so gather updated details
+                        int updatedDriverNumber = getIntInput(scanner, "Enter new com.f1data.management.Driver Number: ");
                         String updatedCurrentTeam = getStringInput(scanner, "Enter new Current Team: ");
                         int updatedAge = getIntInput(scanner, "Enter new Age: ");
                         String updatedNationality = getStringInput(scanner, "Enter new Nationality: ");
@@ -240,7 +240,7 @@ public class DriverManager {
                         updateDriver(updateDriverName, updatedDriver);
                     } else {
                         // If driver is not found, print a message and do not ask for input
-                        System.out.println("Driver not found. No updates made.");
+                        System.out.println("com.f1data.management.Driver not found. No updates made.");
                     }
                     break;
                 case 6:
