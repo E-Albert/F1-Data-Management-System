@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Driver</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="form-container">
+    <h1>Delete Driver</h1>
+    <form action="/confirmDeletion" method="POST">
+        <label for="driverToDelete">Select Driver to Delete:</label>
+        <select id="driverToDelete" name="driverToDelete" required>
+            <!-- This will be populated dynamically with driver names -->
+        </select><br><br>
+
+        <button type="submit">Confirm Deletion</button>
+    </form>
+</div>
+</body>
+</html>

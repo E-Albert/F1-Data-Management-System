@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Driver List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Select a Driver</h1>
+
+    <!-- Dropdown to select driver -->
+    <div class="form-container">
+        <div class="dropdown">
+            <label for="driverSelect">Choose a driver:</label>
+            <select id="driverSelect">
+                <option value="">--Select a driver--</option>
+                <!-- Dynamically populated options will go here -->
+            </select>
+        </div>
+
+        <!-- Driver information displayed here -->
+        <div id="driverInfo" class="driver-info">
+            <h3>Driver Information</h3>
+            <p><strong>Name:</strong> <span id="driverName"></span></p>
+            <p><strong>Number:</strong> <span id="driverNumber"></span></p>
+            <p><strong>Team:</strong> <span id="driverTeam"></span></p>
+            <p><strong>Age:</strong> <span id="driverAge"></span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

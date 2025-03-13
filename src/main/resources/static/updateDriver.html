@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Driver</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="form-container">
+    <h1>Update Driver</h1>
+    <form action="/submitUpdatedDriver" method="POST">
+        <label for="selectDriver">Select Driver:</label>
+        <select id="selectDriver" name="selectDriver" required>
+            <!-- This will be populated dynamically with driver names -->
+        </select><br><br>
+
+        <label for="newDriverName">New Driver Name:</label>
+        <input type="text" id="newDriverName" name="newDriverName"><br><br>
+
+        <label for="newDriverNumber">New Driver Number:</label>
+        <input type="number" id="newDriverNumber" name="newDriverNumber"><br><br>
+
+        <label for="newTeam">New Team:</label>
+        <input type="text" id="newTeam" name="newTeam"><br><br>
+
+        <label for="newAge">New Age:</label>
+        <input type="number" id="newAge" name="newAge"><br><br>
+
+        <label for="newNationality">New Nationality:</label>
+        <input type="text" id="newNationality" name="newNationality"><br><br>
+
+        <label for="newNumRaces">New Number of Races:</label>
+        <input type="number" id="newNumRaces" name="newNumRaces"><br><br>
+
+        <label for="newNumWins">New Number of Wins:</label>
+        <input type="number" id="newNumWins" name="newNumWins"><br><br>
+
+        <label for="newIsActive">Is the driver active?</label>
+        <input type="checkbox" id="newIsActive" name="newIsActive"><br><br>
+
+        <label for="newHeight">New Height (m):</label>
+        <input type="number" step="0.01" id="newHeight" name="newHeight"><br><br>
+
+        <label for="newCareerPoints">New Career Points:</label>
+        <input type="number" id="newCareerPoints" name="newCareerPoints"><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>
